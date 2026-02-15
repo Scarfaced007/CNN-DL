@@ -35,7 +35,7 @@ Bash
 pip install torch torchvision matplotlib numpy opencv-python
 ```
 Execute Cells in Order:
-
+```
 Cells 1-2: Setup environment, fix random seed (42), and load data.
 
 Cells 3-5: Initialize the Baseline ResNet-18 and train it for 35-50 epochs.
@@ -47,7 +47,7 @@ Cell 7: Generate Grad-CAM heatmaps to visualize model attention.
 Cell 8: Train the "Augmented Model" (Constrained Improvement) using RandomCrop/Flip.
 
 Cell 9: Re-evaluate the specific failure cases on the improved model.
-
+```
 📊 Experimental Results
 1. Baseline Performance
 Architecture: ResNet-18 (No pretraining)
