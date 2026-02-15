@@ -1,40 +1,42 @@
 # Stress-Testing of Convolutional Neural Networks (DL Assignment 1)
 
-This repository contains the complete implementation for the "Stress-Testing of CNNs" assignment. It includes a baseline ResNet-18 model trained from scratch on CIFAR-10, a systematic failure analysis using Grad-CAM, and a constrained improvement using Data Augmentation.
+This repository contains the complete implementation for the "Stress-Testing of CNNs" assignment. It focuses on understanding CNN behavior through systematic experimentation, failure analysis, and explainability techniques, rather than just maximizing accuracy.
 
-## 👥 Group Members
+## 👥 Team Members
 * **Member 1:** Satendra Singh (M25AIR006)
 * **Member 2:** Shashank Kumar Gautam (M25AIR007)
 * **Member 3:** Shivansh Yadav (M25AIR008)
 * **Member 4:** Sunil Pargi (M25AIR010)
 
 ## 📌 Project Overview
-The goal of this assignment is to move beyond simple accuracy metrics and understand the "why" behind model predictions.
+The objective of this assignment is to develop a deep and critical understanding of how Convolutional Neural Networks (CNNs) behave in practice. We move beyond simple accuracy metrics to investigate why models fail and how to improve them.
 
-* **Dataset:** CIFAR-10 (10 classes, $32 \times 32$ images)
+* **Dataset:** CIFAR-10 (10 classes, $32 \times 32$ RGB images)
 * **Architecture:** ResNet-18 (Modified for $32 \times 32$ input, trained from scratch)
 * **Framework:** PyTorch
 * **Seed:** 42 (Fixed for reproducibility)
-* **Optimizer:** SGD with Momentum and Cosine Annealing
+* **Optimizer:** SGD with Momentum (0.9) and Weight Decay (5e-4)
+* **Scheduler:** Cosine Annealing
 
 ## 📂 File Structure
 ```text
 .
-├── DL_Assignment_1_.ipynb  # Main Jupyter Notebook containing all code
-├── README.md                             # This file
-├── data/                                 # CIFAR-10 dataset (downloaded automatically)
-└── reports/                              # (Optional) Folder for saved plots/reports
+├── DL_Assignment_1.ipynb               # Main Jupyter Notebook containing all code
+├── training_curves.png                 # Training/validation loss and accuracy curves
+├── model_comparison.png                # Baseline vs improved model comparison
+├── failure_case.png                    # Grad-CAM analysis of failure case 1
+├── analysis_report.txt                 # Comprehensive analysis report
+├── README.md                              # This file (Project Report/README)
+├── data/                               # CIFAR-10 dataset (downloaded automatically)
 ```
-🚀 How to Run the Code
-Open the Notebook: Upload the .ipynb file to Google Colab or run it locally with Jupyter Lab.
+## 🚀 How to Run the Code
+1. Open the Notebook: Upload the .ipynb file to Google Colab or run it locally with Jupyter Lab.
 
-Install Dependencies: The code requires standard PyTorch libraries.
-
-Bash
-```text
+2. Install Dependencies: The code requires standard PyTorch libraries.
+```bash
 pip install torch torchvision matplotlib numpy opencv-python
 ```
-Execute Cells in Order:
+3. Execute Cells in Order:
 ```
 Cells 1-2: Setup environment, fix random seed (42), and load data.
 
@@ -49,38 +51,39 @@ Cell 8: Train the "Augmented Model" (Constrained Improvement) using RandomCrop/F
 Cell 9: Re-evaluate the specific failure cases on the improved model.
 ```
 ## 📊 Experimental Results
-1. Baseline Performance
-Architecture: ResNet-18 (No pretraining)
+1. ### Baseline Performance
 
-Test Accuracy: ~85.4% (Typical baseline)
+- Test Accuracy: 87.42%
+- **Training Behavior:** The model achieved high training accuracy but plateaued on validation, indicating clear overfitting.
+- **High-Confidence Failures:** We identified numerous cases where the model was confident (>90%) but incorrect.
 
-Observation: The model trains smoothly but shows signs of overfitting (Training Acc > Test Acc).
+2. ### Failure Analysis
+- We analyzed distinct failure modes using Grad-CAM:
+- **Background Confusion:** In several cases (e.g., Planes vs. Ships), the model focused on the blue background (sky/water) rather than the object.
+- **Visual Similarity:** Systematic confusion between semantically similar classes like Cat ↔ Dog and Automobile ↔ Truck.
+- **Attention Patterns:** Grad-CAM heatmaps revealed that for misclassified images, the model often attended to "spurious cues" (like grass texture for deer/frogs) rather than defining features.
 
-2. Failure Analysis
-We identified distinct failure modes where the model was confidently wrong (Confidence > 0.90).
+3. ### Improvement Strategy (Data Augmentation)
 
-Common Errors: Background confusion (e.g., Blue background = Plane), Texture bias (e.g., Cat vs. Dog).
+- We applied a single constrained improvement to address the overfitting and brittleness.
+- **Technique:** RandomCrop(32, padding=4) + RandomHorizontalFlip().
+- **Result:** Test Accuracy improved to ~90.5%.
+- **Impact:**
+  - **Failure Reduction:** Significant decrease in high-confidence failures.
+  - **Better Generalization:** The gap between Training and Validation accuracy narrowed significantly.
+  - **Robustness:** The improved model successfully corrected several "off-center" or "reversed" objects that failed in the baseline.
 
-Explainability: Grad-CAM visualizations confirmed that in many failure cases, the model focused on irrelevant background features (e.g., clouds, grass) rather than the object itself.
+4. ### Key Findings
 
-3. Improvement Strategy (Data Augmentation)
-We applied a single constrained improvement: Standard Data Augmentation.
-
-Technique: RandomCrop(32, padding=4) + RandomHorizontalFlip().
-
-Result: Test Accuracy improved to ~88-90%.
-
-Impact: The gap between Training and Validation accuracy narrowed, indicating better generalization. Several failure cases (e.g., off-center objects) were corrected by the augmented model.
+- **Data Augmentation Effectiveness:** A simple augmentation strategy yielded a significant accuracy improvement.
+- **Model Confidence is Deceptive:** High confidence does not imply correctness; the baseline model was frequently "confidently wrong."
+- **Attention Matters:** Correct predictions usually correlated with Grad-CAM heatmaps focusing on the object, while failures often focused on the background.
 
 ## ⚠️ Reproducibility Note
-All experiments utilize a fixed random seed (SEED = 42) for:
+### All experiments utilize a fixed random seed (SEED = 42) for:
 
-Python random
+- Python random
+- numpy
+- torch CPU and CUDA
 
-numpy
-
-torch CPU and CUDA
-
-torch.backends.cudnn (Deterministic mode)
-
-This ensures that the Training Curves, Failure Cases, and Grad-CAM heatmaps generated are identical every time the notebook is run.
+**This ensures that the Training Curves, Failure Cases, and Grad-CAM heatmaps generated are identical every time the notebook is run.**
