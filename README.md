@@ -31,7 +31,9 @@ Open the Notebook: Upload the .ipynb file to Google Colab or run it locally with
 Install Dependencies: The code requires standard PyTorch libraries.
 
 Bash
+```text
 pip install torch torchvision matplotlib numpy opencv-python
+```
 Execute Cells in Order:
 
 Cells 1-2: Setup environment, fix random seed (42), and load data.
