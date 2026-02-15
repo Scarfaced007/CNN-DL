@@ -24,7 +24,7 @@ The objective of this assignment is to develop a deep and critical understanding
 ├── DL_Assignment_1.ipynb               # Main Jupyter Notebook containing all code
 ├── training_curves.png                 # Training/validation loss and accuracy curves
 ├── model_comparison.png                # Baseline vs improved model comparison
-├── failure_case.png                    # Grad-CAM analysis of failure case 1
+├── failure_case.png                    # Grad-CAM analysis of failure cases
 ├── analysis_report.txt                 # Comprehensive analysis report
 ├── README.md                           # This file (Project Report/README)
 ├── data/                               # CIFAR-10 dataset (downloaded automatically)
