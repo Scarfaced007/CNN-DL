@@ -3,10 +3,10 @@
 This repository contains the complete implementation for the "Stress-Testing of CNNs" assignment. It includes a baseline ResNet-18 model trained from scratch on CIFAR-10, a systematic failure analysis using Grad-CAM, and a constrained improvement using Data Augmentation.
 
 ## 👥 Group Members
-* **Member 1:** [Name] (Roll No: [Number])
-* **Member 2:** [Name] (Roll No: [Number])
-* **Member 3:** [Name] (Roll No: [Number])
-* **Member 4:** [Name] (Roll No: [Number])
+* **Member 1:** Satendra Singh (M25AIR006)
+* **Member 2:** Shashank Kumar Gautam (M25AIR007)
+* **Member 3:** Shivansh Yadav (M25AIR008)
+* **Member 4:** Sunil Pargi (M25AIR010)
 
 ## 📌 Project Overview
 The goal of this assignment is to move beyond simple accuracy metrics and understand the "why" behind model predictions.
@@ -20,11 +20,11 @@ The goal of this assignment is to move beyond simple accuracy metrics and unders
 ## 📂 File Structure
 ```text
 .
-├── DL_Assignment_1_Group_[RollNo].ipynb  # Main Jupyter Notebook containing all code
+├── DL_Assignment_1_.ipynb  # Main Jupyter Notebook containing all code
 ├── README.md                             # This file
 ├── data/                                 # CIFAR-10 dataset (downloaded automatically)
 └── reports/                              # (Optional) Folder for saved plots/reports
-
+```
 🚀 How to Run the Code
 Open the Notebook: Upload the .ipynb file to Google Colab or run it locally with Jupyter Lab.
 
