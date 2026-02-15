@@ -26,7 +26,7 @@ The objective of this assignment is to develop a deep and critical understanding
 ├── model_comparison.png                # Baseline vs improved model comparison
 ├── failure_case.png                    # Grad-CAM analysis of failure case 1
 ├── analysis_report.txt                 # Comprehensive analysis report
-├── README.md                              # This file (Project Report/README)
+├── README.md                           # This file (Project Report/README)
 ├── data/                               # CIFAR-10 dataset (downloaded automatically)
 ```
 ## 🚀 How to Run the Code
