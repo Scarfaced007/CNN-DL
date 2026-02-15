@@ -48,7 +48,7 @@ Cell 8: Train the "Augmented Model" (Constrained Improvement) using RandomCrop/F
 
 Cell 9: Re-evaluate the specific failure cases on the improved model.
 ```
-📊 Experimental Results
+## 📊 Experimental Results
 1. Baseline Performance
 Architecture: ResNet-18 (No pretraining)
 
@@ -72,7 +72,7 @@ Result: Test Accuracy improved to ~88-90%.
 
 Impact: The gap between Training and Validation accuracy narrowed, indicating better generalization. Several failure cases (e.g., off-center objects) were corrected by the augmented model.
 
-⚠️ Reproducibility Note
+## ⚠️ Reproducibility Note
 All experiments utilize a fixed random seed (SEED = 42) for:
 
 Python random
